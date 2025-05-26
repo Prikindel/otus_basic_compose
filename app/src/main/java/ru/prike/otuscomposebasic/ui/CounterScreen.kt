@@ -17,8 +17,26 @@ fun CounterScreen(
 ) {
     val count = counterViewModel.count.collectAsState().value
 
+    CounterComponent(
+        count = count,
+        onClickPlus = { counterViewModel.increment() },
+        onClickMinus = { counterViewModel.decrement() },
+        onClickReset = { counterViewModel.reset() },
+        onNavigateToDetail = onNavigateToDetail
+    )
+}
+
+@Composable
+private fun CounterComponent(
+    count: Int,
+    modifier: Modifier = Modifier,
+    onClickPlus: () -> Unit = {},
+    onClickMinus: () -> Unit = {},
+    onClickReset: () -> Unit = {},
+    onNavigateToDetail: () -> Unit = {}
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -27,15 +45,15 @@ fun CounterScreen(
         Text(text = "Count: $count")
         Spacer(Modifier.height(8.dp))
         Row {
-            Button(onClick = { counterViewModel.increment() }) {
+            Button(onClick = onClickPlus) {
                 Text("+")
             }
             Spacer(Modifier.width(8.dp))
-            Button(onClick = { counterViewModel.decrement() }) {
+            Button(onClick = onClickMinus) {
                 Text("-")
             }
             Spacer(Modifier.width(8.dp))
-            Button(onClick = { counterViewModel.reset() }) {
+            Button(onClick = onClickReset) {
                 Text("Reset")
             }
         }

@@ -49,15 +49,3 @@ fun DetailScreen(
         }
     }
 }
-
-fun SimpleRowLayout() {
-    Row {
-        Image(painter = painterResource(...), ...)
-        Column {
-            Text(text = "Hello, Jetpack Compose!")
-            Button(onClick = {}) {
-                Text(text = "Click Me")
-            }
-        }
-    }
-}
